@@ -1,0 +1,99 @@
+/* Container */
+.jobpost-container {
+ 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 15px;
+  flex-wrap: wrap;
+}
+
+/* Card */
+.jobpost-card {
+  background: #efedef;
+  width: 100%;
+  max-width: 600px;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+/* Title */
+.jobpost-card h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Form */
+.jobpost-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Inputs */
+.jobpost-form input,
+.jobpost-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.jobpost-form input:focus,
+.jobpost-form textarea:focus {
+  border-color: #007bff;
+}
+
+/* Textarea */
+.jobpost-form textarea {
+  min-height: 180px; /* increase from 100px → 180px or more */
+  resize: vertical;
+}
+
+/* Row (2 inputs side by side) */
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.row input {
+  flex: 1;
+}
+
+/* Button */
+.jobpost-form button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.jobpost-form button:hover {
+  background: #0056b3;
+}
+
+/* Disabled input */
+input:disabled {
+  background: #f1f1f1;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .row {
+    flex-direction: column;
+  }
+
+  .jobpost-card {
+    padding: 20px;
+  }
+}

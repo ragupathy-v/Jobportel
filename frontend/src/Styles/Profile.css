@@ -1,0 +1,94 @@
+/* Main Container */
+.profile-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+/* Profile Image */
+.profile-container img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #0a66c2;
+  margin-bottom: 15px;
+}
+
+/* Username */
+.profile-container p:nth-child(2) {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Name */
+.profile-container p:nth-child(3) {
+  font-size: 15px;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+/* Resume Section */
+.profile-container div {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Resume Link */
+.profile-container a {
+  text-decoration: none;
+  color: #0a66c2;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.profile-container a:hover {
+  text-decoration: underline;
+}
+
+/* File Input */
+.profile-container input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Upload Button */
+.profile-container button {
+  width: 100%;
+  padding: 10px;
+  background: #0a66c2;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  transition: 0.3s ease;
+}
+
+.profile-container button:hover {
+  background: #004182;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .profile-container {
+    margin: 20px;
+    padding: 15px;
+  }
+}

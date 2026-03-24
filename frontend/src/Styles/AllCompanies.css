@@ -1,0 +1,79 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+/* Company Card */
+.company-card {
+    width: 70%;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 15px 0;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid #eaeaea;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.company-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Flex layout for content inside card */
+.card-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Logo box */
+.logo-box img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+/* Text box */
+.text-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Company Name */
+.companyname {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #222;
+}
+
+/* Rating & Category */
+.about {
+    
+    color: #555;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    padding: 0% !important;
+}
+
+@media (max-width: 576px) {
+    .company-card {
+        width: 100%; /* Let it take up more width on small screens */
+        padding: 15px;
+    }
+
+    .logo-box img {
+        width: 40px;
+        height: 40px;
+    }
+}
