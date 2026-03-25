@@ -6,7 +6,7 @@ from rest_framework import views
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.parsers import MultiPartParser, FormParser,JSONParser
 # Create your views here.
 
 class UserViewset(viewsets.ModelViewSet):
@@ -24,7 +24,7 @@ class userview(views.APIView):
 
 class updateresume(views.APIView):
     permission_classes=[IsAuthenticated]
-    parser_classes = [MultiPartParser, FormParser]
+    parser_classes = [MultiPartParser, FormParser,JSONParser]
     def patch(self,request):
         user=request.user
         
