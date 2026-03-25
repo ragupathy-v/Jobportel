@@ -12,7 +12,7 @@ from rest_framework.parsers import MultiPartParser, FormParser,JSONParser
 class UserViewset(viewsets.ModelViewSet):
     queryset=UserModel.objects.all()
     serializer_class=userserializer
-    parser_classes = [MultiPartParser, FormParser]
+   
     
 
 class userview(views.APIView):

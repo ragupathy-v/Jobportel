@@ -6,6 +6,7 @@ import logo from "../Assert/logo/PortelLogo.png"
 
 function Signup() {
 
+
 const [name, setName] = useState('')
 const [email, setEmail] = useState('')
 const [number, setNumber] = useState('')
@@ -14,10 +15,9 @@ const navigate=useNavigate()
 const [error,setError]=useState('')
 const register = async (e) => {
   e.preventDefault()
-
+  const base_url=import.meta.env.VITE_BACKEND_BASE_URL
   try {
-    const res = await axios.post(
-      "https://jobportel-j0if.onrender.com/account/register/",
+    const res = await axios.post(`${base_url}account/register/`,
       { username:name, email:email, phone_num:number, password:password }
     )
     

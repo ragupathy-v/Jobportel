@@ -14,8 +14,9 @@ export default function Login() {
 
      const loginfunction=async(e)=>{
       e.preventDefault()
+      Base_url=import.meta.env.VITE_BACKEND_BASE_URL
       try{ 
-        const res=await axios.post('https://jobportel-j0if.onrender.com/account/login/',{username,password})
+        const res=await axios.post(`${Base_url}account/login/`,{username,password})
         console.log(res.data)
         localStorage.setItem('accesstoken',res.data.access)
         localStorage.setItem('refreshtoken',res.data.refresh)
