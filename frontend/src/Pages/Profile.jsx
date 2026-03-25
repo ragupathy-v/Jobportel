@@ -23,7 +23,7 @@ function Profile() {
     try{
       const formresume=new FormData()
       formresume.append('resume',resume)
-      const res= await axiosInstant.post('account/resume/',formresume)
+      const res= await axiosInstant.patch('account/resume/',formresume)
       console.log(res)
      
       window.location.reload()
@@ -36,7 +36,7 @@ function Profile() {
   return (
     <>
     <div className="profile-container">
-    <img src={`http://127.0.0.1:8000${data.profileImg}`} />
+    <img src={data?.profileImg} />
     
     <p>{data?.name}</p>
     <p>{data?.phone_num}</p>
@@ -45,7 +45,7 @@ function Profile() {
     {data?.user_type=='employee'&&<div>
       {data?.resume && (
         <a
-          href={`http://127.0.0.1:8000${data.resume}`}
+          href={data?.resume}
           target="_blank"
           rel="noopener noreferrer"
         >

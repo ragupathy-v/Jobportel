@@ -12,6 +12,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 class UserViewset(viewsets.ModelViewSet):
     queryset=UserModel.objects.all()
     serializer_class=userserializer
+    parser_classes = [MultiPartParser, FormParser]
     
 
 class userview(views.APIView):
@@ -24,7 +25,7 @@ class userview(views.APIView):
 class updateresume(views.APIView):
     permission_classes=[IsAuthenticated]
     parser_classes = [MultiPartParser, FormParser]
-    def post(self,request):
+    def patch(self,request):
         user=request.user
         
         serializer=userserializer(

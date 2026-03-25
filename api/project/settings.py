@@ -29,6 +29,14 @@ DEBUG = config('DEBUG',default=False,cast=bool)
 
 ALLOWED_HOSTS = ['*']
 
+# cloudinary setting for files to save in cloud
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': config('CLOUDINARY_API_KEY'),
+    'API_SECRET': config('CLOUDINARY_API_SECRET'),
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Application definition
 
@@ -39,11 +47,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #django app
     'Account',
     'Company',
+    #restframework 
     'rest_framework',
     'rest_framework_simplejwt',
     "corsheaders",
+    #cloudinary
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [

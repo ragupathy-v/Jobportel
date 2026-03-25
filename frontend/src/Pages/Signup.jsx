@@ -17,10 +17,10 @@ const register = async (e) => {
 
   try {
     const res = await axios.post(
-      "http://127.0.0.1:8000/account/register/",
+      "https://jobportel-j0if.onrender.com/account/register/",
       { username:name, email:email, phone_num:number, password:password }
     )
-
+    
    console.log(res.data)
    console.log("User registered successfully")
    navigate('/')

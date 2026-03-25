@@ -15,7 +15,7 @@ export default function Login() {
      const loginfunction=async(e)=>{
       e.preventDefault()
       try{ 
-        const res=await axios.post('http://127.0.0.1:8000/account/login/',{username,password})
+        const res=await axios.post('https://jobportel-j0if.onrender.com/account/login/',{username,password})
         console.log(res.data)
         localStorage.setItem('accesstoken',res.data.access)
         localStorage.setItem('refreshtoken',res.data.refresh)
