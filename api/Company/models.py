@@ -45,10 +45,15 @@ class Job(models.Model):
         return f"{self.title}-{self.company}"
 
 class Application(models.Model):
-
+    status_choice=[
+        ('pending',"pending"),
+        ('rejected','rejected'),
+        ('recive_mail','recive mail')
+    ]
 
     user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     job=models.ForeignKey(Job,on_delete=models.CASCADE)
+    status=models.CharField(max_length=20,choices=status_choice,default='pending')
 
     class Meta:
         unique_together=['user','job']

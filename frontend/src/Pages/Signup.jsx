@@ -3,7 +3,7 @@ import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import "../Styles/SignUp.css"
 import logo from "../Assert/logo/PortelLogo.png"
-
+import useLoading ,{ LoadingCom } from "../hooks/useLoading"
 function Signup() {
 
 
@@ -13,9 +13,13 @@ const [number, setNumber] = useState('')
 const [password, setPassword] = useState('')
 const navigate=useNavigate()
 const [error,setError]=useState('')
+//loading hook
+const{loading,startLoading,stopLoading}=useLoading()
+
 const register = async (e) => {
   e.preventDefault()
   const base_url=import.meta.env.VITE_BACKEND_BASE_URL
+  startLoading()
   try {
     const res = await axios.post(`${base_url}account/register/`,
       { username:name, email:email, phone_num:number, password:password }
@@ -36,10 +40,12 @@ const register = async (e) => {
     setError(message)
    
   }
+  finally{stopLoading()}
 }
 
   return (
-  
+   loading? <LoadingCom loading={loading}/>
+   :  
  <div className="register-main ">
     
       <div className="register-right container">
@@ -78,7 +84,7 @@ const register = async (e) => {
         </div>
       </div>
     </div>
-    
+  
       
   )
 }

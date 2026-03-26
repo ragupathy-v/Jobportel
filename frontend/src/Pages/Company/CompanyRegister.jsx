@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axiosInstant from '../../Axios/AxiosInstant'
 import '../../Styles/CompanyRegister.css'
+import useLoading ,{ LoadingCom } from "../../hooks/useLoading"
+
 
 function CompanyRegister() {
     const[name,setName]=useState('')
@@ -11,6 +13,8 @@ function CompanyRegister() {
 
     const[createCompany,setcreateCompany]=useState([])
 
+  //loading hook
+  const{loading,startLoading,stopLoading}=useLoading()
 
     async function companyfetch() {
         try{
@@ -26,19 +30,24 @@ function CompanyRegister() {
     }
     async function handelRegister(e){
           e.preventDefault()
+          startLoading()
         try{
             const res= await axiosInstant.post('company/companyregister/',{name,about,address,website})
             console.log(res.data,'succes')
-            
+            companyfetch()
             
         }
         catch (err) {
                 console.log(err.response.data)
         }
+        finally{
+          stopLoading()
+        }
     }
     useEffect(()=>{companyfetch()},[])
   return (
-
+    loading? <LoadingCom loading={loading}/>
+    :
     <>
         <div className="company-container">
   {!createCompany?.have_company ? (

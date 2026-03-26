@@ -2,6 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 import axiosInstant from "../../Axios/AxiosInstant"
 import '../../Styles/JobPost.css'
+import useLoading ,{ LoadingCom } from "../../hooks/useLoading"
 
 function JobPost() {
   const [title, setTitle] = useState('')
@@ -13,8 +14,12 @@ function JobPost() {
   const [location, setLocation] = useState('')
   const [applylink, setApplylink] = useState('')
 
+  //loading hook
+  const{loading,startLoading,stopLoading}=useLoading()
+
   async function postJob(e){
      e.preventDefault()
+     startLoading()
     try{
         const res= await axiosInstant.post('company/jobs/',{title,description,experience_min:Number(experienceMin),
                     experience_max:Number(experienceMax),salary_min:Number(salaryMin),
@@ -32,9 +37,15 @@ function JobPost() {
     }
     catch(err){
         console.log(err.message)
+        
+    }
+    finally{
+      stopLoading()
     }
   }
   return (
+    loading ?<LoadingCom loading={loading}/>
+    :
     <>
        <div className="jobpost-container">
     <div className="jobpost-card">

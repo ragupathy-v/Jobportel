@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AuthContex } from '../Context/AuthProvider'
 import '../Styles/Login.css'
 import logo from "../Assert/logo/PortelLogo.png"
+import useLoading, { LoadingCom } from '../hooks/useLoading'
+
 
 export default function Login() {
      const [username,setUsername]=useState('')
@@ -11,10 +13,12 @@ export default function Login() {
      const [error,setError]=useState('')
      const navigate=useNavigate()
      const {setIsLoggedIn}=useContext(AuthContex)
+    const{loading,startLoading,stopLoading}=useLoading()
 
      const loginfunction=async(e)=>{
       e.preventDefault()
        const Base_url=import.meta.env.VITE_BACKEND_BASE_URL
+       startLoading() 
       try{ 
         const res=await axios.post(`${Base_url}account/login/`,{username,password})
         console.log(res.data)
@@ -29,9 +33,13 @@ export default function Login() {
         // setTimeout(()=>setError(''),5000)
         setError('invailed credential')
       }
+      finally{
+        stopLoading()
+      }
       
      }
   return (
+    loading? <LoadingCom loading={loading}/>:(
      <div className="login-main container">
      
       <div className="login-right">
@@ -72,5 +80,7 @@ export default function Login() {
         </div>
       </div>
     </div>
+    )
+    
   )
 }

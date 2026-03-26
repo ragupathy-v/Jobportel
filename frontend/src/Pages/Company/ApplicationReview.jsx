@@ -4,54 +4,98 @@ import axiosInstant from '../../Axios/AxiosInstant'
 import '../../Styles/ApplicationReview.css'
 
 function ApplicationReview() {
-    const{id}=useParams()
-    const[applications,setApplications]=useState([])
-    async function applicationapi(){
-      
-      try{
-      const res=await axiosInstant.get(`company/application/`,{
-        params:{'job': id}
+  const { id } = useParams()
+  const [applications, setApplications] = useState([])
+
+  async function updatestates(id, status) {
+    try {
+      const res = await axiosInstant.patch(`company/application/${id}/`, {
+        status
       })
-      console.log(res.data,'application')
-      setApplications(res.data)
-      }
-      catch(err){
-        console.log(err.response)     }
+      console.log(res.data)
     }
-    useEffect(()=>{applicationapi()},[id])
+    catch (err) {
+      console.log(err)
+    }
+    finally {
+      applicationapi()
+    }
+  }
+
+  async function applicationapi() {
+    try {
+      const res = await axiosInstant.get(`company/application/`, {
+        params: { 'job': id }
+      })
+      console.log(res.data, 'application')
+      setApplications(res.data)
+    }
+    catch (err) {
+      console.log(err.response)
+    }
+  }
+
+  useEffect(() => { applicationapi() }, [id])
+
   return (
-    <>
-        <div className="review-container">
-  <h2 className="review-title">Applications count-{applications.length}</h2>
+    <div className="review-container">
 
-  {applications.map((application) => (
-    <div className="card" key={application.id}>
-      <div className="card-header">
-        <h3>{application.user.name || "Name not added"}</h3>
-      </div>
+      <h2 className="review-title">
+        Applications Count - {applications.length}
+      </h2>
 
-      <div className="card-body">
-        {application.user.resume ? (
-          <a
-            href={application.user.resume}
-            target="_blank"
-            rel="noreferrer"
-            className="resume-btn"
-          >
-            View Resume
-          </a>
-        ) : (
-          <p className="no-resume">Resume not uploaded</p>
-        )}
+      {applications.map((application) => (
+        <div className="card" key={application.id}>
 
-        <Link to='/user' className="profile-btn">View Profile</Link>
-      </div>
+          <div className="card-header">
+            <h3>
+              {application.user.name || "Name not added"}
+            </h3>
+
+            <p className={`status-badge status-${application.status}`}>
+              {application.status==="recive_mail"?'recived mail':application.status}
+            </p>
+
+          </div>
+
+          <div className="card-body">
+
+            {application.user.resume ? (
+              <a
+                href={application?.user?.resume}
+                target="_blank"
+                rel="noreferrer"
+                className="resume-btn"
+              >
+                View Resume
+              </a>
+            ) : (
+              <p className="no-resume">
+                Resume not uploaded
+              </p>
+            )}
+
+            <Link to='/user' className="profile-btn">
+              View Profile
+            </Link>
+
+            <select
+              value={application.status}
+              onChange={(e) =>
+                updatestates(application.id, e.target.value)
+              }
+            >
+              <option value="pending">Pending</option>
+              <option value="recive_mail">Received Mail</option>
+              <option value="rejected">Rejected</option>
+            </select>
+
+          </div>
+
+        </div>
+      ))}
+
     </div>
-  ))}
-</div>
-
-    </>
-    
   )
 }
 

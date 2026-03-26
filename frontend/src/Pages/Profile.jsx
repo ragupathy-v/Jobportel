@@ -6,7 +6,7 @@ import useUser from '../hooks/UseUser';
 import '../Styles/Profile.css'
 function Profile() {
 
-
+    const cloud_url=import.meta.env.VITE_CLOUDINARY_URL
     const[resume,setResume]=useState(null)
     const data= useUser()
    
@@ -45,7 +45,7 @@ function Profile() {
     {data?.user_type=='employee'&&<div>
       {data?.resume && (
         <a
-          href={data?.resume}
+          href={`${cloud_url}${data?.resume}`}
           target="_blank"
           rel="noopener noreferrer"
         >

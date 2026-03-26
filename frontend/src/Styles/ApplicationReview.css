@@ -1,5 +1,5 @@
 .review-container {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 40px auto;
   padding: 20px;
 }
@@ -7,46 +7,82 @@
 .review-title {
   font-size: 28px;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   text-align: center;
+  color: #222;
 }
 
 /* Card */
 .card {
   background: #ffffff;
-  border-radius: 12px;
-  padding: 20px;
+  border-radius: 14px;
+  padding: 22px;
   margin-bottom: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: 0.3s ease;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: 0.25s ease;
+  border: 1px solid #f0f0f0;
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
 }
 
 /* Header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
 .card-header h3 {
   font-size: 20px;
-  margin-bottom: 10px;
+  font-weight: 600;
   color: #333;
+}
+
+/* Status badge */
+.status-badge {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.status-pending {
+  background: #fff4d6;
+  color: #f39c12;
+}
+
+.status-recive_mail {
+  background: #dff7e8;
+  color: #27ae60;
+}
+
+.status-rejected {
+  background: #ffe5e5;
+  color: #e74c3c;
 }
 
 /* Body */
 .card-body {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
 }
 
 /* Resume button */
 .resume-btn {
-  padding: 8px 14px;
+  padding: 9px 16px;
   background-color: #0a66c2;
   color: #fff;
-  border-radius: 6px;
+  border-radius: 8px;
   text-decoration: none;
   font-size: 14px;
+  font-weight: 500;
   transition: 0.3s;
 }
 
@@ -56,20 +92,57 @@
 
 /* Profile button */
 .profile-btn {
-  padding: 8px 14px;
+  padding: 9px 16px;
   background-color: #f3f6f8;
-  border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   transition: 0.3s;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
 }
 
 .profile-btn:hover {
-  background-color: #e0e0e0;
+  background-color: #e4e6eb;
+}
+
+/* Status dropdown */
+select {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+  cursor: pointer;
+  font-size: 14px;
+  background: white;
+  transition: 0.3s;
+}
+
+select:hover {
+  border-color: #0a66c2;
+}
+
+select:focus {
+  border-color: #0a66c2;
+  box-shadow: 0 0 0 2px rgba(10, 102, 194, 0.1);
 }
 
 /* No resume text */
 .no-resume {
-  color: red;
+  color: #e74c3c;
   font-size: 14px;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card-body {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .review-title {
+    font-size: 22px;
+  }
 }
