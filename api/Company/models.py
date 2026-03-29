@@ -19,7 +19,7 @@ class Companyinfo(models.Model):
     
 
 class Skills(models.Model):
-    name=models.CharField(max_length=200)   
+    name=models.CharField(max_length=200,blank=True,null=True)   
     def __str__(self):
         return self.name
 
@@ -35,7 +35,7 @@ class Job(models.Model):
     salary_max=models.IntegerField()
 
     location=models.CharField(max_length=100)
-    skills=models.ManyToManyField(Skills)
+    skills=models.ManyToManyField(Skills,blank=True,null=True)
     user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     company=models.ForeignKey(Companyinfo,on_delete=models.CASCADE,related_name='jobs')
     applylink=models.URLField(null=True,blank=True)
@@ -54,6 +54,7 @@ class Application(models.Model):
     user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     job=models.ForeignKey(Job,on_delete=models.CASCADE)
     status=models.CharField(max_length=20,choices=status_choice,default='pending')
+    #created_at=models.DateTimeField(auto_now_add=True)
 
     class Meta:
         unique_together=['user','job']

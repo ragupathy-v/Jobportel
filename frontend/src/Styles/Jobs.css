@@ -1,81 +1,280 @@
-/* Job Card */
-.fulldev{
-  width: 100%;
-  height: 1200px;
-  max-height: 100%;
-}
-.outerdiv {
-  border: 1px solid #ddd;
-  margin: 17px auto;
-  background-color: #ffffff;
-  border-radius: 15px;
-  padding-top: 20px;
-  padding-left: 20px;
-  width: 70%;
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,400&family=Outfit:wght@300;400;500;600&display=swap');
 
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  text-decoration: none;
-  display: block;
-  color: inherit;
-  transition: 0.2s ease;
-  
-
+/* ── Variables ── */
+:root {
+  --ep-bg:       #0f0f11;
+  --ep-card:     #17171a;
+  --ep-border:   #2a2a2f;
+  --ep-input-bg: #1e1e23;
+  --ep-accent:   #c8f135;
+  --ep-text:     #f0ede8;
+  --ep-muted:    #6b6b78;
+  --ep-label:    #9a9aaa;
+  --radius:      16px;
+  --transition:  0.22s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-
-.outerdiv:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+/* ── Page ── */
+.jb-page {
+  min-height: 100vh;
+  background: var(--ep-bg);
+  font-family: 'Outfit', sans-serif;
+  position: relative;
+  overflow-x: hidden;
+  padding-bottom: 5rem;
 }
 
-/* Title */
-.jobtitle {
-  color: #121212;
-  font-size: 18px;
+/* ── Blobs ── */
+.jb-blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(110px);
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+.jb-blob--1 {
+  width: 580px; height: 580px;
+  background: var(--ep-accent);
+  top: -200px; right: -180px;
+}
+.jb-blob--2 {
+  width: 440px; height: 440px;
+  background: #3b82f6;
+  bottom: 0; left: -150px;
+}
+
+/* ── Inner ── */
+.jb-inner {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 3.5rem 1.5rem 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Header ── */
+.jb-header {
+  text-align: center;
+  margin-bottom: 2.8rem;
+  animation: jb-fade 0.5s ease both;
+}
+
+@keyframes jb-fade {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.jb-label {
+  display: inline-block;
+  font-size: 0.7rem;
   font-weight: 600;
+  color: var(--ep-accent);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
 }
 
-/* Row */
-.list-div {
+.jb-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.9rem, 5vw, 2.7rem);
+  font-weight: 500;
+  color: var(--ep-text);
+  margin: 0 0 0.6rem;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.jb-title em {
+  font-style: italic;
+  background: linear-gradient(110deg, #c8f135, #a8d420);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.jb-sub {
+  font-size: 0.83rem;
+  color: var(--ep-muted);
+  font-weight: 300;
+  margin: 0;
+}
+
+.jb-count {
+  font-weight: 600;
+  color: var(--ep-accent);
+}
+
+/* ── List ── */
+.jb-list {
   display: flex;
-  gap: 20px;   /* spacing between items */
-  flex-wrap: wrap;
-  margin-bottom: 10px;
+  flex-direction: column;
+  gap: 0.85rem;
 }
 
-/* Each item */
-.item {
+/* ── Card ── */
+.jb-card {
+  display: block;
+  text-decoration: none;
+  background: var(--ep-card);
+  border: 1px solid var(--ep-border);
+  border-radius: var(--radius);
+  padding: 1.35rem 1.4rem 1.1rem;
+  position: relative;
+  overflow: hidden;
+  animation: jb-rise 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+@keyframes jb-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.jb-card:hover {
+  border-color: rgba(200, 241, 53, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* hover glow sweep */
+.jb-card-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 0% 0%,
+    rgba(200, 241, 53, 0.055) 0%,
+    transparent 55%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition);
+}
+
+.jb-card:hover .jb-card-glow { opacity: 1; }
+
+/* ── Top row ── */
+.jb-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+}
+
+.jb-card-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.jb-job-title {
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--ep-text);
+  margin: 0;
+  line-height: 1.2;
+  transition: color var(--transition);
+}
+
+.jb-card:hover .jb-job-title { color: #fff; }
+
+.jb-company-name {
+  font-size: 0.78rem;
+  color: var(--ep-muted);
+  font-weight: 400;
+}
+
+.jb-time {
+  font-size: 0.7rem;
+  color: var(--ep-muted);
+  font-weight: 300;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── Chips ── */
+.jb-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
+}
+
+.jb-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--ep-label);
+  background: var(--ep-input-bg);
+  border: 1px solid var(--ep-border);
+  border-radius: 999px;
+  padding: 0.28rem 0.75rem;
+  transition: border-color var(--transition);
+}
+
+.jb-chip svg {
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.jb-chip--accent {
+  color: var(--ep-accent);
+  background: rgba(200, 241, 53, 0.07);
+  border-color: rgba(200, 241, 53, 0.2);
+}
+
+.jb-card:hover .jb-chip { border-color: #3a3a42; }
+
+/* ── Description ── */
+.jb-desc {
+  font-size: 0.8rem;
+  color: var(--ep-muted);
+  font-weight: 300;
+  line-height: 1.6;
+  margin: 0 0 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Footer row ── */
+.jb-card-footer {
   display: flex;
   align-items: center;
-  font-size: 14px;
-  color: #555;
-}
-/* .discription {
- 
-  padding-bottom: 10px;
-  width: 20px;
-  height: 20px;
-} */
-
-/* Icon */
-.item svg {
-  margin-right: 6px;
-  font-size: 16px;
-  color: #444;
+  justify-content: flex-end;
+  gap: 0.3rem;
+  border-top: 1px solid var(--ep-border);
+  padding-top: 0.75rem;
 }
 
-/* Description */
-.text-truncate {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  
+.jb-cta {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ep-muted);
+  transition: color var(--transition);
 }
 
-/* Time */
-.time {
-  font-size: 12px;
-  color: gray;
-  padding-bottom: 2px;
+.jb-arrow {
+  color: var(--ep-border);
+  transition: color var(--transition), transform var(--transition);
+}
+
+.jb-card:hover .jb-cta  { color: var(--ep-accent); }
+.jb-card:hover .jb-arrow {
+  color: var(--ep-accent);
+  transform: translateX(3px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 500px) {
+  .jb-inner { padding: 2.5rem 1rem 2rem; }
+  .jb-card  { padding: 1.1rem 1rem 0.9rem; }
+  .jb-card-top { flex-direction: column; gap: 0.3rem; }
+  .jb-time { align-self: flex-end; }
 }

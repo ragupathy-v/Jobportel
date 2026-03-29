@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400&family=Outfit:wght@300;400;500;600&display=swap');
+
+/* ── Footer wrapper ── */
+.ft-footer {
+  background: #0f0f11;
+  font-family: 'Outfit', sans-serif;
+  position: relative;
+}
+
+/* ── Lime top accent line ── */
+.ft-topline {
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #c8f135 30%,
+    #3b82f6 70%,
+    transparent 100%
+  );
+  opacity: 0.6;
+}
+
+/* ── Main inner row ── */
+.ft-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.8rem 2rem 2rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* ── Brand block ── */
+.ft-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.ft-logo {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.55rem;
+  color: #f0ede8;
+  letter-spacing: -0.01em;
+  background: linear-gradient(110deg, #c8f135, #f0ede8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ft-tagline {
+  font-size: 0.8rem;
+  color: #6b6b78;
+  font-weight: 300;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+/* ── Nav columns ── */
+.ft-cols {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.ft-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.ft-col-title {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #c8f135;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0 0 0.2rem;
+}
+
+.ft-link {
+  font-size: 0.83rem;
+  color: #6b6b78;
+  text-decoration: none;
+  font-weight: 400;
+  transition: color 0.18s ease, transform 0.18s ease;
+  display: inline-block;
+}
+
+.ft-link:hover {
+  color: #f0ede8;
+  transform: translateX(3px);
+}
+
+/* ── Bottom bar ── */
+.ft-bottom {
+  border-top: 1px solid #2a2a2f;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.ft-copy {
+  font-size: 0.75rem;
+  color: #44444e;
+  margin: 0;
+  font-weight: 300;
+  letter-spacing: 0.03em;
+}
+
+/* ── Decorative dots ── */
+.ft-dots {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.ft-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #2a2a2f;
+  display: block;
+}
+
+.ft-dot--accent {
+  background: #c8f135;
+  opacity: 0.7;
+  width: 8px;
+  height: 8px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 520px) {
+  .ft-inner {
+    flex-direction: column;
+    padding: 2rem 1.4rem 1.5rem;
+  }
+  .ft-cols {
+    gap: 2rem;
+  }
+  .ft-bottom {
+    padding: 0.9rem 1.4rem;
+    justify-content: center;
+    text-align: center;
+  }
+}

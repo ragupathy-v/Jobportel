@@ -1,6 +1,7 @@
 
 import { Outlet } from 'react-router-dom'
 import Navbars from '../Components/Navbars'
+import Footer from '../Pages/Footer'
 
 function HomeLayout() {
 
@@ -8,12 +9,13 @@ function HomeLayout() {
     <>
     <Navbars />
     <div  style={{ paddingTop: "71px", 
-                  background:'#c8cbcd',
+                  background:'linear-gradient(150deg, #0a1628 0%, #112240 55%, #0f3460 100%)',
                   width:'100%',
                   minHeight:'100vh'
                   }}>
                     
          <Outlet/>
+         <Footer/>
     </div>
    
     </>

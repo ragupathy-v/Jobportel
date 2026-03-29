@@ -17,6 +17,7 @@ function JobInformation() {
       try{
       const res=await axiosInstant.post(`company/application/`,{'job':id})
       console.log(res.status)
+      fetchJobinfo()
       }
       catch(err){
         console.log(err.response?.data)
@@ -71,7 +72,7 @@ function JobInformation() {
                 {job.applylink ? <a target="_blank"  
                 rel="noopener noreferrer"
                 href={job.applylink}
-                >apply on site</a> : job.is_applied ? <button disabled  >applied</button>: <Link onClick={application} to={`/application/${job.id}`}>apply</Link>}
+                >apply on site</a> : job.is_applied ? <button disabled  >applied</button>: <Link onClick={application} target='_blank' to={`/application/${job.id}`}>apply</Link>}
                 <p className=' m-1'>Applicants:{job.application_count}</p>
               </div>
                 <hr/>

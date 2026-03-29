@@ -51,8 +51,8 @@ function CompanyRegister() {
     <>
         <div className="company-container">
   {!createCompany?.have_company ? (
-    <div className="company-card">
-      <h2>Register Your Company</h2>
+    <div className="company-formcard">
+      <h2 className='register'>Register Your Company</h2>
 
       <form onSubmit={handelRegister} className="company-form">
 
@@ -89,8 +89,8 @@ function CompanyRegister() {
       </form>
     </div>
   ) : (
-    <div className="company-card">
-      <h2>Company Details</h2>
+    <div className="company-formcard">
+      <h2 className=' register'>Company Details</h2>
 
       <div className="company-details">
         <p><strong>Name:</strong> {createCompany.name}</p>

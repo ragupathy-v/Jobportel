@@ -18,6 +18,8 @@ import Application from './Pages/Application'
 import CompanyRegister from './Pages/Company/CompanyRegister'
 import JobPost from './Pages/Company/JobPost'
 import ApplicationReview from './Pages/Company/ApplicationReview'
+import EditeProfile from './Pages/EditeProfile'
+import ApplicationStatus from './Pages/ApplicationStatus'
 
 function App() {
   const router=createBrowserRouter(
@@ -37,6 +39,8 @@ function App() {
            <Route path='application/:id' element={<Application/>}/>
            <Route path='Companyregister' element={<CompanyRegister/>}/>
            <Route path='jobpost' element={<JobPost/>}/>
+           <Route path='editeprofile' element={<EditeProfile/>}/>
+           <Route path='applicationstatus' element={<ApplicationStatus/>}/>
         </Route>
 
         <Route path='companies' element={<ProtectedRoute><CompaniesLayouts/></ProtectedRoute>}>

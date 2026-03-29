@@ -1,0 +1,142 @@
+/* ============================================================
+   TOP COMPANIES SECTION
+   ============================================================ */
+.section {
+  padding: 80px 5%;
+  background: var(--bg-card);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 52px;
+}
+
+.section-label {
+  display: inline-block;
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  background: var(--primary-light);
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 400;
+  color: var(--gray-900);
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+
+.section-sub {
+  font-size: 15px;
+  color: var(--gray-500);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Grid */
+.companies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+/* Company card */
+.company-card {
+  background: var(--bg-card);
+  padding: 28px 20px;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  border: 1.5px solid var(--gray-200);
+  box-shadow: var(--shadow-xs);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.company-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary);
+}
+
+/* Logo / emoji */
+.company-logo-big {
+  font-size: 2.2rem;
+  margin-bottom: 12px;
+  display: block;
+}
+
+/* Company name */
+.company-name {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--gray-900);
+  margin-bottom: 5px;
+}
+
+/* Jobs count */
+.company-jobs-count {
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+/* Action buttons */
+.company-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.company-search {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.company-search:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.company-visit {
+  border: 1.5px solid var(--primary);
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 600;
+  transition: background var(--transition), color var(--transition);
+}
+
+.company-visit:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .section {
+    padding: 60px 4%;
+  }
+
+  .companies-grid {
+    grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+    gap: 14px;
+  }
+}

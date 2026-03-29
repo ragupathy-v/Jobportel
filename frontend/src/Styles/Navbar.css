@@ -1,67 +1,261 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+/* ============================================================
+   IMPORTS
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+
+/* ============================================================
+   CSS VARIABLES
+   ============================================================ */
+:root {
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-glow: rgba(37, 99, 235, 0.25);
+
+  --danger: #dc2626;
+  --danger-hover: #b91c1c;
+  --danger-glow: rgba(220, 38, 38, 0.25);
+
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-700: #334155;
+  --gray-800: #1e293b;
+  --gray-900: #0f172a;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-full: 999px;
+
+  --transition: 0.2s ease;
+  --transition-bounce: 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --nav-height: 68px;
+  --nav-font: 'DM Sans', sans-serif;
 }
 
-.img{
-    width: 70px;
-    height: 40px;
-    margin: auto;
-    
-}
-.header{
-    background-color: rgb(234, 232, 232);
-    width: 100vw;
-    height: 70px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    position: fixed;
-    z-index: 7;
-}
-
-
-.login{
-    background-color:#171717 !important;
-    color: #ffffffee !important;
-    padding: 8px 24px !important;
-    border-radius: 29px !important;
-    font-size: 14px !important;
-    font-weight: 500 !important;
-    text-decoration: none !important;
+/* ============================================================
+   DESKTOP NAVBAR
+   ============================================================ */
+.header {
+  font-family: var(--nav-font);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--gray-200);
+  width: 100vw;
+  height: var(--nav-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 48px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  box-shadow: 0 1px 12px rgba(15, 23, 42, 0.06);
 }
 
-.explore,.about{
+.header > div {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* ============================================================
+   LOGO
+   ============================================================ */
+.img {
+  width: 110px;
+  height: 38px;
+  object-fit: contain;
+  transition: opacity var(--transition);
+}
+
+.img:hover {
+  opacity: 0.85;
+}
+
+/* ============================================================
+   NAV LINKS (explore / about / refer)
+   ============================================================ */
+.explore,
+.about,
+.refer {
+  font-family: var(--nav-font);
   font-size: 14px !important;
   font-weight: 500 !important;
-  padding: 8px 24px !important;
-  color: #171717 !important;
+  padding: 8px 18px !important;
+  color: var(--gray-700) !important;
   border: none !important;
   text-decoration: none !important;
+  border-radius: var(--radius-full) !important;
+  letter-spacing: 0.01em;
+  position: relative;
+  white-space: nowrap;
+  transition:
+    background var(--transition),
+    color var(--transition),
+    transform var(--transition-bounce) !important;
 }
 
-.refer{
-    font-size: 14px !important;
-    font-weight: 500 !important;
-    padding: 8px 24px !important;
-    color: #171717 !important;
-    border: none !important;
-    text-decoration: none !important;
-}
-.refer:hover{
-    background-color: #100f0f2b;
-    border-radius: 15px;
+.explore:hover,
+.about:hover,
+.refer:hover {
+  background: var(--gray-100) !important;
+  color: var(--primary) !important;
+  transform: translateY(-1px);
 }
 
+/* ============================================================
+   CTA BUTTON — Profile / Login (dark pill)
+   ============================================================ */
+.login {
+  font-family: var(--nav-font);
+  background: var(--gray-900) !important;
+  color: #ffffff !important;
+  padding: 9px 22px !important;
+  border-radius: var(--radius-full) !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  border: none !important;
+  letter-spacing: 0.02em;
+  transition:
+    background var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition-bounce) !important;
+}
 
-@media (max-width:992px){
-    .header{
-        display: none;
-    }
-    #nav{
-        margin-bottom: 70px;
-        background-color: rgb(255, 255, 255) ;
-    }
-    
+.login:hover {
+  background: var(--primary) !important;
+  box-shadow: 0 4px 16px var(--primary-glow) !important;
+  transform: translateY(-1px) !important;
+  color: #fff !important;
+}
+
+/* ============================================================
+   LOGOUT BUTTON — red / danger
+   ============================================================ */
+.logout-btn {
+  font-family: var(--nav-font);
+  background: transparent !important;
+  color: var(--danger) !important;
+  padding: 8px 18px !important;
+  border-radius: var(--radius-full) !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  border: 1.5px solid var(--danger) !important;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition:
+    background var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition-bounce) !important;
+}
+
+.logout-btn:hover {
+  background: var(--danger) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 16px var(--danger-glow) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* ============================================================
+   DIVIDER between nav sections (optional subtle separator)
+   ============================================================ */
+.nav-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--gray-200);
+  margin: 0 8px;
+}
+
+/* ============================================================
+   MOBILE NAVBAR (Bootstrap)
+   ============================================================ */
+#nav {
+  font-family: var(--nav-font) !important;
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-bottom: 1px solid var(--gray-200);
+  box-shadow: 0 2px 16px rgba(15, 23, 42, 0.07);
+  height: 60px;
+}
+
+#nav .navbar-brand img {
+  height: 32px;
+  width: auto;
+}
+
+#nav .navbar-toggler {
+  border: 1.5px solid var(--gray-300) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 6px 10px;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+#nav .navbar-toggler:focus {
+  box-shadow: 0 0 0 3px var(--primary-glow) !important;
+  outline: none;
+}
+
+#nav .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='%23334155' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Collapse menu */
+#nav .navbar-collapse {
+  background: #ffffff;
+  border-top: 1px solid var(--gray-100);
+  padding: 8px 0 16px;
+  margin-top: 4px;
+}
+
+#nav .nav-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray-700) !important;
+  padding: 10px 20px !important;
+  border-radius: var(--radius-sm);
+  margin: 2px 8px;
+  transition: background var(--transition), color var(--transition);
+}
+
+#nav .nav-link:hover {
+  background: var(--gray-100);
+  color: var(--primary) !important;
+}
+
+/* Mobile logout link */
+#nav .nav-link.logout-mobile {
+  color: var(--danger) !important;
+  font-weight: 600;
+  border: 1.5px solid transparent;
+  margin-top: 6px;
+}
+
+#nav .nav-link.logout-mobile:hover {
+  background: #fef2f2;
+  color: var(--danger-hover) !important;
+  border-color: #fecaca;
+}
+
+/* ============================================================
+   RESPONSIVE VISIBILITY
+   ============================================================ */
+@media (max-width: 991px) {
+  .header {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) {
+  #nav {
+    display: none !important;
+  }
 }

@@ -6,44 +6,43 @@ import { AuthContex } from '../Context/AuthProvider'
 
 import '../Styles/Home.css'
 
+import Hero from './Hero'
+import useUser from '../hooks/UseUser'
+import CompanyHome from './Company/CompanyHome'
+
+
 function Home() {
+  const user=useUser()
 
   const navigate=useNavigate()
   const{setIsLoggedIn}=useContext(AuthContex)
 //logout function
-const logout=()=>{
-  localStorage.removeItem('accesstoken')
-  localStorage.removeItem('refreshtoken')
-  setIsLoggedIn(false)
-  navigate('/')
-  console.log('user logedout')
-}
+// const logout=()=>{
+//   localStorage.removeItem('accesstoken')
+//   localStorage.removeItem('refreshtoken')
+//   setIsLoggedIn(false)
+//   navigate('/')
+//   console.log('user logedout')
+// }
 
-  const jobdata=async()=>{
-    try{
-    const res=await axiosInstant.get('company/jobs/')
+  const jobs= async()=>{
+  try{
+    const res= await axiosInstant.get('company/jobs/',{})
     console.log(res.data)
-    console.log('data recived')
-    
+    // const indianjob=res.data.jobs.filter((jobs)=>(jobs.companyName.lowercase==='tcs'))
+    // console.log(indianjob)
   }
-  catch(error){
-    console.log(error.response?.data)
-  
+  catch(err){
+    console.log(err)
   }
-  }
+ }
 
-  useEffect(()=>{
-    jobdata() 
-  },[])
+ useEffect(()=>{jobs()},[])
   return ( 
     <>
+    {user?.user_type==='employee'?<Hero/>:<CompanyHome/>}
   
-    <div>
-       <h1>home</h1>
-      <button onClick={logout} >logout</button>
-    </div>
-    
-    
+
     </>
     
   )

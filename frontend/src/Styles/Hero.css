@@ -1,0 +1,323 @@
+/* ============================================================
+   HERO SECTION
+   ============================================================ */
+.hero {
+  background: linear-gradient(145deg, #0a1628 0%, #112240 50%, #0f3460 100%);
+  padding: 120px 5% 90px;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+/* Subtle grid overlay */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px);
+  background-size: 64px 64px;
+  pointer-events: none;
+}
+
+/* Glowing orbs */
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(6,182,212,0.18) 0%, transparent 70%);
+  top: -100px;
+  right: -80px;
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(37,99,235,0.2) 0%, transparent 70%);
+  bottom: 80px;
+  left: -60px;
+  pointer-events: none;
+}
+
+/* Content wrapper */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Badge */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(6, 182, 212, 0.12);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  color: #67e8f9;
+  padding: 7px 18px;
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 28px;
+  letter-spacing: 0.02em;
+}
+
+.hero-badge-dot {
+  width: 6px;
+  height: 6px;
+  background: #22d3ee;
+  border-radius: 50%;
+  animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.7); }
+}
+
+/* Heading */
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 400;
+  color: #f1f5f9;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+}
+
+.hero h1 em {
+  color: #22d3ee;
+  font-style: italic;
+}
+
+/* Subtitle */
+.hero-sub {
+  font-size: 16px;
+  color: #94a3b8;
+  margin-bottom: 36px;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+/* ============================================================
+   SEARCH BAR
+   ============================================================ */
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.1);
+  padding: 8px;
+  gap: 0;
+  overflow: hidden;
+}
+
+.search-field {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  gap: 10px;
+}
+
+.search-field-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.search-field input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 15px;
+  font-family: var(--font-body);
+  color: var(--gray-800);
+  background: transparent;
+}
+
+.search-field input::placeholder {
+  color: var(--gray-400);
+}
+
+.search-divider {
+  width: 1px;
+  height: 32px;
+  background: var(--gray-200);
+  flex-shrink: 0;
+}
+
+.search-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 13px 24px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
+  font-family: var(--font-body);
+  letter-spacing: 0.01em;
+}
+
+.search-btn:hover {
+  background: var(--primary-dark);
+  box-shadow: 0 4px 16px rgba(37,99,235,0.4);
+  transform: translateY(-1px);
+}
+
+/* Popular tags */
+.search-tags {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.search-tag {
+  padding: 6px 16px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  color: rgba(255,255,255,0.75);
+  font-size: 13px;
+  transition: border-color var(--transition), background var(--transition), color var(--transition);
+}
+
+.search-tag:hover {
+  border-color: rgba(34,211,238,0.5);
+  background: rgba(34,211,238,0.1);
+  color: #67e8f9;
+}
+
+/* ============================================================
+   JOB RESULTS (within Hero)
+   ============================================================ */
+.fulldev {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 840px;
+  margin: 40px auto 0;
+}
+
+.outerdiv {
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 22px 26px;
+  margin: 14px 0;
+  text-decoration: none;
+  display: block;
+  color: inherit;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.outerdiv:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.jobtitle {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: 4px;
+}
+
+.list-div {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: var(--gray-500);
+}
+
+.item svg {
+  font-size: 15px;
+  color: var(--gray-400);
+  flex-shrink: 0;
+}
+
+.text-truncate {
+  font-size: 14px;
+  color: var(--gray-500);
+  line-height: 1.55;
+  margin: 8px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.time {
+  font-size: 12px;
+  color: var(--gray-400);
+  padding-bottom: 0;
+  padding-top: 6px;
+}
+
+/* Responsive search bar */
+@media (max-width: 640px) {
+  .hero {
+    padding: 100px 4% 70px;
+  }
+
+  .search-bar {
+    flex-direction: column;
+    border-radius: var(--radius-md);
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .search-field {
+    width: 100%;
+    border-bottom: 1px solid var(--gray-200);
+    padding-bottom: 12px;
+  }
+
+  .search-field:last-of-type {
+    border-bottom: none;
+  }
+
+  .search-divider {
+    display: none;
+  }
+
+  .search-btn {
+    width: 100%;
+    padding: 14px;
+  }
+
+  .fulldev {
+    margin-top: 30px;
+  }
+
+  .outerdiv {
+    padding: 16px;
+  }
+}

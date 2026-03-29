@@ -51,7 +51,8 @@ class Jobserializer(serializers.ModelSerializer):
 
 class Applicationserializer(serializers.ModelSerializer):
     user=userserializer(read_only=True)
-    
+    job=Jobserializer(read_only=True)
+    #company=Companyinfoserializer(read_only=True)
     class Meta:
         model=Application
         fields='__all__'

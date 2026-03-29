@@ -14,6 +14,12 @@ class CompanyViewset(ModelViewSet):
     serializer_class=Companyinfoserializer
     parser_classes=[MultiPartParser,FormParser]
 
+    def get_queryset(self):
+        id=self.request.query_params.get('id')
+        if id:
+            return Companyinfo.objects.filter(id=id)
+        return Companyinfo.objects.all()
+
 class CompanyRegister(mixins.CreateModelMixin,mixins.ListModelMixin,generics.GenericAPIView):
     serializer_class=Companyinfoserializer
     permission_classes=[IsAuthenticated]
@@ -84,11 +90,26 @@ class jobViewset(ModelViewSet):
         return {"request":self.request}
     def get_queryset(self):
         user=self.request.user
+        location=self.request.query_params.get('location')
+        job_title=self.request.query_params.get('title')
+        id=self.request.query_params.get('id')
+        
+        if id:
+            company=Companyinfo.objects.get(id=id)
+            return Job.objects.filter(company=company).order_by('-created_at')
+        
+        if job_title and location:
+            return Job.objects.filter(title__icontains=job_title,location__icontains=location).order_by('-created_at')
+        elif job_title:
+            return Job.objects.filter(title__icontains=job_title).order_by('-created_at')
+        elif location: 
+            return Job.objects.filter(location__icontains=location).order_by('-created_at')
+        
         if user.user_type=='employee':
-            return Job.objects.all()
+            return Job.objects.all().order_by('-created_at')
         elif user.user_type=='company':
-            return Job.objects.filter(company__user=user)
-        return Job.objects.none()
+            return Job.objects.filter(company__user=user).order_by('-created_at')
+      
     
     def perform_create(self, serializer):
         user=self.request.user
@@ -114,7 +135,11 @@ class ApplicationViewset(ModelViewSet):
         
     def get_queryset(self):
         job_id=self.request.query_params.get('job')
+        user_id=self.request.query_params.get('userid')
         if job_id:
             return Application.objects.filter(job__id=job_id)
+        
+        if user_id:
+            return Application.objects.filter(user__id=user_id)
         return Application.objects.all()
     

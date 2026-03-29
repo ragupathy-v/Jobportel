@@ -2,84 +2,101 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axiosInstant from "../Axios/AxiosInstant";
 import { formatDistanceToNow } from "date-fns";
-//react icons
 import { CiLocationOn } from "react-icons/ci";
 import { RiMoneyRupeeCircleFill } from "react-icons/ri";
 import { TfiBag } from "react-icons/tfi";
-import { MdOutlineDescription } from "react-icons/md";
-
-import "../Styles/Jobs.css";
+import "../Styles/jobs.css";
 import useUser from "../hooks/UseUser";
 
 function Jobs() {
-  const user=useUser()
-  const [jobs, setJobs] = useState([]);
-  //job fetching api
+  const user = useUser()
+  const [jobs, setJobs] = useState([])
+
   async function fetchJobs() {
     try {
-     
-      const res = await axiosInstant.get("company/jobs");
-      setJobs(res.data);
-      console.log(res.data,'employee jobs');
-   
+      const res = await axiosInstant.get("company/jobs")
+      setJobs(res.data)
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
   }
-  useEffect(() => {
-    fetchJobs();
-  }, []);
+
+  useEffect(() => { fetchJobs() }, [])
+
   return (
-    <>
-      <div className=" fulldev">
-        {jobs.map((jobs) => (
-          <Link
-            to={user?.user_type=='employee'? `/job/${jobs.id}` : `/companies/review/${jobs.id}`}
-            key={jobs.id}
-            className=" outerdiv"
-          >
-            <div>
-              <div>
-              <h3 className="jobtitle">{jobs.title}</h3>
-              <span className=" pb-1">{jobs.company?.name}</span>
+    <div className="jb-page">
+      <div className="jb-blob jb-blob--1" />
+      <div className="jb-blob jb-blob--2" />
+
+      <div className="jb-inner">
+
+        {/* ── Header ── */}
+        <header className="jb-header">
+          <span className="jb-label">✦ Opportunities</span>
+          <h1 className="jb-title">Latest <em>Job Listings</em></h1>
+          <p className="jb-sub">
+            <span className="jb-count">{jobs.length}</span> jobs found
+          </p>
+        </header>
+
+        {/* ── Cards ── */}
+        <div className="jb-list">
+          {jobs.map((job, i) => (
+            <Link
+              to={user?.user_type === 'employee' ? `/job/${job.id}` : `/companies/review/${job.id}`}
+              key={job.id}
+              className="jb-card"
+              style={{ animationDelay: `${i * 0.06}s` }}
+            >
+              <div className="jb-card-glow" />
+
+              {/* top row: title + time */}
+              <div className="jb-card-top">
+                <div className="jb-card-titles">
+                  <h3 className="jb-job-title">{job.title}</h3>
+                  <span className="jb-company-name">{job.company?.name}</span>
+                </div>
+                <span className="jb-time">
+                  {formatDistanceToNow(new Date(job.created_at), { addSuffix: true })}
+                </span>
               </div>
-              <div className="list-div">
-                <div className="item">
+
+              {/* chips row */}
+              <div className="jb-chips">
+                <span className="jb-chip">
                   <CiLocationOn />
-                  <span>{jobs.location}</span>
-                </div>
-
-                <div className="item">
+                  {job.location}
+                </span>
+                <span className="jb-chip jb-chip--accent">
                   <RiMoneyRupeeCircleFill />
-                  <span>
-                    {jobs.salary_min} - {jobs.salary_max}
-                  </span>
-                </div>
-
-                <div className="item">
+                  {job.salary_min} – {job.salary_max}
+                </span>
+                <span className="jb-chip">
                   <TfiBag />
-                  <span>
-                    {jobs.experience_min} - {jobs.experience_max} yrs
-                  </span>
-                </div>
+                  {job.experience_min} – {job.experience_max} yrs
+                </span>
               </div>
-              <div className="item">
-                <MdOutlineDescription className="discription" />
-              <p className=" text-truncate w-75">{jobs.description}</p>
+
+              {/* description */}
+              <p className="jb-desc">{job.description}</p>
+
+              {/* footer row */}
+              <div className="jb-card-footer">
+                <span className="jb-cta">View Details</span>
+                <svg className="jb-arrow" width="16" height="16" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" strokeWidth="2.5"
+                  strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
               </div>
-              <hr/>
-              <p className="time">
-                
-                {formatDistanceToNow(new Date(jobs.created_at), {
-                  addSuffix: true,
-                })}
-              </p>
-            </div>
-          </Link>
-        ))}
+
+            </Link>
+          ))}
+        </div>
+
       </div>
-    </>
-  );
+    </div>
+  )
 }
 
-export default Jobs;
+export default Jobs

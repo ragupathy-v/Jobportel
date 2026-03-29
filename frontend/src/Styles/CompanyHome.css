@@ -1,0 +1,477 @@
+/* ===== CompanyHome.css ===== */
+
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:wght@400;500&display=swap');
+
+/* ---- Root & background ---- */
+.ch-root {
+  min-height: 100vh;
+  background: #050d1a;
+  font-family: 'DM Sans', sans-serif;
+  position: relative;
+  overflow-x: hidden;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.ch-root.ch-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Ambient blobs */
+.ch-blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+}
+.ch-blob-1 {
+  width: 480px; height: 480px;
+  background: rgba(30, 80, 200, 0.18);
+  top: -100px; left: -80px;
+}
+.ch-blob-2 {
+  width: 360px; height: 360px;
+  background: rgba(20, 180, 140, 0.12);
+  top: 40%; right: -60px;
+}
+.ch-blob-3 {
+  width: 300px; height: 300px;
+  background: rgba(100, 60, 220, 0.1);
+  bottom: 0; left: 30%;
+}
+
+/* ---- Layout ---- */
+.ch-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ---- Hero ---- */
+.ch-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2.5rem 2.5rem;
+  background: rgba(255,255,255,0.04);
+  border: 0.5px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  backdrop-filter: blur(12px);
+  animation: ch-fadein 0.6s ease both;
+}
+
+.ch-hero-left { flex: 1; }
+
+.ch-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #4adeaa;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  background: rgba(74, 222, 170, 0.1);
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 0.5px solid rgba(74, 222, 170, 0.25);
+}
+
+.ch-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #4adeaa;
+  animation: ch-pulse 2s infinite;
+}
+
+@keyframes ch-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.ch-hero-title {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(26px, 4vw, 40px);
+  font-weight: 700;
+  color: #f0f4ff;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.ch-brand {
+  background: linear-gradient(90deg, #60a5fa, #4adeaa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ch-hero-sub {
+  font-size: 15px;
+  color: rgba(200, 215, 240, 0.7);
+  line-height: 1.7;
+  margin-bottom: 1.75rem;
+}
+
+.ch-hero-sub strong {
+  color: #f0f4ff;
+}
+
+.ch-hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ---- Buttons ---- */
+.ch-btn-primary {
+  padding: 11px 24px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 18px rgba(37, 99, 235, 0.35);
+}
+
+.ch-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(37, 99, 235, 0.45);
+}
+
+.ch-btn-primary:active { transform: scale(0.98); }
+
+.ch-btn-sm { padding: 9px 20px; font-size: 13px; }
+
+.ch-btn-ghost {
+  padding: 11px 24px;
+  background: rgba(255,255,255,0.06);
+  color: rgba(200, 215, 240, 0.85);
+  border: 0.5px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.ch-btn-ghost:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.25);
+}
+
+/* ---- Hero visual ---- */
+.ch-hero-visual {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ch-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 0.5px solid rgba(96,165,250,0.25);
+  animation: ch-spin linear infinite;
+}
+
+.ch-ring-1 { width: 130px; height: 130px; animation-duration: 14s; }
+.ch-ring-2 { width: 100px; height: 100px; animation-duration: 10s; animation-direction: reverse; border-color: rgba(74,222,170,0.2); }
+.ch-ring-3 { width: 68px; height: 68px; animation-duration: 7s; border-color: rgba(167,139,250,0.2); }
+
+@keyframes ch-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.ch-hero-icon {
+  font-size: 38px;
+  z-index: 1;
+  filter: drop-shadow(0 0 18px rgba(96,165,250,0.4));
+}
+
+/* ---- Stats ---- */
+.ch-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.ch-stat-card {
+  background: rgba(255,255,255,0.04);
+  border: 0.5px solid rgba(255,255,255,0.09);
+  border-radius: 18px;
+  padding: 1.25rem 1.5rem;
+  animation: ch-fadein 0.5s ease both;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.ch-stat-card:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.18);
+}
+
+.ch-stat-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.ch-stat-icon { font-size: 20px; }
+
+.ch-stat-trend {
+  font-size: 11px;
+  color: #4adeaa;
+  background: rgba(74,222,170,0.1);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.ch-stat-value {
+  font-family: 'Sora', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #f0f4ff;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.ch-stat-label {
+  font-size: 12px;
+  color: rgba(180, 200, 230, 0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ---- Two col grid ---- */
+.ch-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* ---- Panel ---- */
+.ch-panel {
+  background: rgba(255,255,255,0.04);
+  border: 0.5px solid rgba(255,255,255,0.09);
+  border-radius: 20px;
+  padding: 1.5rem;
+  animation: ch-fadein 0.6s ease both;
+}
+
+.ch-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.ch-panel-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #e8f0ff;
+}
+
+.ch-link-btn {
+  font-size: 13px;
+  color: #60a5fa;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  opacity: 0.8;
+  transition: opacity 0.15s;
+}
+
+.ch-link-btn:hover { opacity: 1; }
+
+/* ---- Jobs list ---- */
+.ch-jobs-list { display: flex; flex-direction: column; gap: 4px; }
+
+.ch-job-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-radius: 12px;
+  transition: background 0.15s;
+  cursor: pointer;
+}
+
+.ch-job-row:hover { background: rgba(255,255,255,0.05); }
+
+.ch-job-row-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.ch-job-row-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #dde8ff;
+}
+
+.ch-job-row-meta {
+  font-size: 12px;
+  color: rgba(180,200,230,0.5);
+}
+
+.ch-job-badge {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.ch-job-badge--active {
+  background: rgba(74, 222, 170, 0.1);
+  color: #4adeaa;
+}
+
+.ch-job-badge--paused {
+  background: rgba(251, 191, 36, 0.1);
+  color: #fbbf24;
+}
+
+/* ---- Applicants list ---- */
+.ch-applicants-list { display: flex; flex-direction: column; gap: 4px; }
+
+.ch-applicant-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  transition: background 0.15s;
+  cursor: pointer;
+}
+
+.ch-applicant-row:hover { background: rgba(255,255,255,0.05); }
+
+.ch-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1e40af, #1d4ed8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #bfdbfe;
+  flex-shrink: 0;
+  border: 0.5px solid rgba(96,165,250,0.3);
+}
+
+.ch-applicant-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.ch-applicant-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #dde8ff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ch-applicant-role {
+  font-size: 12px;
+  color: rgba(180,200,230,0.5);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ch-applicant-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.ch-status-pill {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.ch-applicant-time {
+  font-size: 11px;
+  color: rgba(180,200,230,0.4);
+}
+
+/* ---- CTA Banner ---- */
+.ch-cta-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, rgba(37,99,235,0.25) 0%, rgba(29,78,216,0.12) 100%);
+  border: 0.5px solid rgba(96,165,250,0.25);
+  border-radius: 20px;
+  animation: ch-fadein 0.7s ease both;
+}
+
+.ch-cta-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #e8f0ff;
+  margin-bottom: 4px;
+}
+
+.ch-cta-sub {
+  font-size: 13px;
+  color: rgba(180,200,230,0.65);
+  line-height: 1.6;
+}
+
+/* ---- Animation ---- */
+@keyframes ch-fadein {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .ch-stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .ch-grid-2col { grid-template-columns: 1fr; }
+  .ch-hero { flex-direction: column; text-align: center; padding: 1.75rem; }
+  .ch-hero-actions { justify-content: center; }
+  .ch-hero-visual { display: none; }
+  .ch-cta-banner { flex-direction: column; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .ch-stats-grid { grid-template-columns: 1fr 1fr; }
+  .ch-stat-value { font-size: 26px; }
+}

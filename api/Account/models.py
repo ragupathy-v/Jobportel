@@ -16,6 +16,9 @@ class UserModel(AbstractUser):
     name=models.CharField(max_length=100,blank=True,null=True)
     user_type=models.CharField(choices=user_type_choise,max_length=20, default='employee')
     phone_num=models.CharField(max_length=15,unique=True)
+    location=models.CharField(max_length=100,blank=True,null=True)
+    linkedin=models.URLField(blank=True,null=True)
+    portfolio=models.URLField(blank=True,null=True)
     # profileImg=models.ImageField(upload_to='profile/',blank=True,null=True)
     #resume=models.FileField(upload_to='resumes/',blank=True,null=True)
     

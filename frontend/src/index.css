@@ -1,14 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap');
 
-*{
+/* =============================================
+   DESIGN TOKENS
+   ============================================= */
+:root {
+  --primary:       #2563eb;
+  --primary-dark:  #1d4ed8;
+  --primary-light: #dbeafe;
+  --accent:        #06b6d4;
+  --accent-light:  #cffafe;
+
+  --gray-50:  #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
+  --gray-600: #475569;
+  --gray-700: #334155;
+  --gray-800: #1e293b;
+  --gray-900: #0f172a;
+
+  --success:    #10b981;
+  --success-bg: #d1fae5;
+  --warning:    #f59e0b;
+  --warning-bg: #fef3c7;
+  --danger:     #ef4444;
+  --danger-bg:  #fee2e2;
+
+  --bg-page:   #f8fafc;
+  --bg-card:   #ffffff;
+  --bg-subtle: #f1f5f9;
+
+  --font-body:    'DM Sans', system-ui, sans-serif;
+  --font-display: 'DM Serif Display', Georgia, serif;
+
+  --shadow-xs: 0 1px 2px rgba(15,23,42,0.06);
+  --shadow-sm: 0 2px 8px rgba(15,23,42,0.08);
+  --shadow-md: 0 4px 16px rgba(15,23,42,0.10);
+  --shadow-lg: 0 8px 32px rgba(15,23,42,0.12);
+
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   18px;
+  --radius-xl:   24px;
+  --radius-full: 9999px;
+
+  --transition: 0.22s cubic-bezier(0.4,0,0.2,1);
+}
+
+*, *::before, *::after {
   box-sizing: border-box;
-  padding: 0px;
-  margin: 0px;
+  padding: 0;
+  margin: 0;
 }
 
-
-
-body{
-  font-family: "Poppins", sans-serif;
-  background-color: rgb(247, 248, 249);
-
+html {
+  scroll-behavior: smooth;
 }
+
+body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--gray-800);
+  background-color: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg { display: block; max-width: 100%; }
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+a:hover { color: var(--primary-dark); }
+
+button { font-family: var(--font-body); cursor: pointer; }
+input, textarea, select { font-family: var(--font-body); }

@@ -1,0 +1,340 @@
+/* ============================================================
+   IMPORTS
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ============================================================
+   VARIABLES
+   ============================================================ */
+:root {
+  --as-bg: #080e1a;
+  --as-surface: #0f1724;
+  --as-card: #131e30;
+  --as-card-hover: #172236;
+  --as-border: rgba(255, 255, 255, 0.06);
+  --as-border-hover: rgba(99, 179, 237, 0.35);
+
+  --as-primary: #63b3ed;
+  --as-primary-dark: #3b82f6;
+  --as-primary-glow: rgba(99, 179, 237, 0.15);
+
+  --as-success: #34d399;
+  --as-success-bg: rgba(52, 211, 153, 0.08);
+  --as-success-border: rgba(52, 211, 153, 0.25);
+
+  --as-warning: #fbbf24;
+  --as-warning-bg: rgba(251, 191, 36, 0.08);
+  --as-warning-border: rgba(251, 191, 36, 0.25);
+
+  --as-danger: #f87171;
+  --as-danger-bg: rgba(248, 113, 113, 0.08);
+  --as-danger-border: rgba(248, 113, 113, 0.25);
+
+  --as-text: #e2e8f0;
+  --as-text-sub: #94a3b8;
+  --as-text-muted: #475569;
+
+  --font: 'Sora', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-card: 18px;
+  --radius-badge: 999px;
+  --radius-sm: 8px;
+  --transition: 0.2s ease;
+  --transition-bounce: 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ============================================================
+   PAGE WRAPPER
+   ============================================================ */
+.as-container {
+  font-family: var(--font);
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 100px 24px 80px;
+  min-height: 100vh;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.as-header {
+  margin-bottom: 40px;
+}
+
+.as-header h2 {
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: var(--as-text);
+  letter-spacing: -0.02em;
+  margin: 0 0 6px;
+}
+
+.as-header h2 span {
+  font-weight: 700;
+  color: var(--as-primary);
+}
+
+.as-header p {
+  font-size: 13px;
+  color: var(--as-text-muted);
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+}
+
+/* ============================================================
+   CARD
+   ============================================================ */
+.as-card {
+  position: relative;
+  background: var(--as-card);
+  border: 1.5px solid var(--as-border);
+  border-radius: var(--radius-card);
+  padding: 26px 28px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  overflow: hidden;
+  text-decoration: none;
+  cursor: default;
+  transition:
+    transform var(--transition),
+    border-color var(--transition),
+    background var(--transition),
+    box-shadow var(--transition);
+  animation: asCardIn 0.38s ease both;
+}
+
+.as-card:nth-child(1) { animation-delay: 0.04s; }
+.as-card:nth-child(2) { animation-delay: 0.08s; }
+.as-card:nth-child(3) { animation-delay: 0.12s; }
+.as-card:nth-child(4) { animation-delay: 0.16s; }
+.as-card:nth-child(5) { animation-delay: 0.20s; }
+
+@keyframes asCardIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.as-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--as-border-hover);
+  background: var(--as-card-hover);
+  box-shadow:
+    0 10px 32px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(99, 179, 237, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* Left glow bar */
+.as-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  border-radius: var(--radius-card) 0 0 var(--radius-card);
+  background: var(--as-primary);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.as-card:hover::before { opacity: 1; }
+
+/* ============================================================
+   COMPANY LOGO PLACEHOLDER
+   ============================================================ */
+.as-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #1a3a5c, #0f2440);
+  border: 1.5px solid rgba(99, 179, 237, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--as-primary);
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+}
+
+/* ============================================================
+   CARD CONTENT
+   ============================================================ */
+.as-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.as-company {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--as-primary);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.as-job-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--as-text);
+  letter-spacing: -0.01em;
+  margin-bottom: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ============================================================
+   STATUS BADGE
+   ============================================================ */
+.as-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: var(--radius-badge);
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1.5px solid transparent;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: transform var(--transition-bounce);
+}
+
+.as-card:hover .as-badge {
+  transform: scale(1.04);
+}
+
+.as-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Variants */
+.as-badge-pending {
+  background: var(--as-warning-bg);
+  color: var(--as-warning);
+  border-color: var(--as-warning-border);
+}
+.as-badge-pending .as-badge-dot { background: var(--as-warning); }
+
+.as-badge-recive_mail,
+.as-badge-received {
+  background: var(--as-success-bg);
+  color: var(--as-success);
+  border-color: var(--as-success-border);
+}
+.as-badge-recive_mail .as-badge-dot,
+.as-badge-received .as-badge-dot { background: var(--as-success); }
+
+.as-badge-rejected {
+  background: var(--as-danger-bg);
+  color: var(--as-danger);
+  border-color: var(--as-danger-border);
+}
+.as-badge-rejected .as-badge-dot { background: var(--as-danger); animation: none; }
+
+/* ============================================================
+   EMPTY STATE
+   ============================================================ */
+.as-empty {
+  text-align: center;
+  padding: 80px 20px;
+  animation: asCardIn 0.4s ease both;
+}
+
+.as-empty-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  background: var(--as-card);
+  border: 1.5px solid var(--as-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  margin: 0 auto 20px;
+}
+
+.as-empty h3 {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--as-text-sub);
+  margin-bottom: 8px;
+}
+
+.as-empty p {
+  font-size: 13px;
+  color: var(--as-text-muted);
+}
+
+/* ============================================================
+   SKELETON LOADER
+   ============================================================ */
+.as-skeleton {
+  background: var(--as-card);
+  border: 1.5px solid var(--as-border);
+  border-radius: var(--radius-card);
+  padding: 26px 28px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  overflow: hidden;
+}
+
+.sk {
+  background: linear-gradient(90deg, #1a2540 25%, #1f2e4a 50%, #1a2540 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 6px;
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+.sk-logo { width: 52px; height: 52px; border-radius: 14px; flex-shrink: 0; }
+.sk-block { flex: 1; }
+.sk-line { height: 10px; margin-bottom: 10px; border-radius: 4px; }
+.sk-line-sm { width: 40%; height: 10px; border-radius: 4px; }
+.sk-line-lg { width: 70%; }
+.sk-badge { width: 90px; height: 28px; border-radius: 999px; flex-shrink: 0; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 580px) {
+  .as-container { padding: 88px 14px 48px; }
+
+  .as-card {
+    flex-wrap: wrap;
+    padding: 20px 18px;
+    gap: 14px;
+  }
+
+  .as-logo { width: 42px; height: 42px; font-size: 15px; }
+  .as-job-title { font-size: 14px; }
+
+  .as-badge {
+    width: 100%;
+    justify-content: center;
+  }
+}
