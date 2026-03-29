@@ -5,7 +5,7 @@ import { formatDistanceToNow } from "date-fns";
 import { CiLocationOn } from "react-icons/ci";
 import { RiMoneyRupeeCircleFill } from "react-icons/ri";
 import { TfiBag } from "react-icons/tfi";
-import "../Styles/jobs.css";
+import "../Styles/Jobs.css";
 import useUser from "../hooks/UseUser";
 
 function Jobs() {
