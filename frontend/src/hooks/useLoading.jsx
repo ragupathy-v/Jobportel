@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import  '../Styles/loaing.css'
+import  '../Styles/Loading.css'
 
 function useLoading() {
 
