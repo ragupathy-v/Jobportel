@@ -47,7 +47,8 @@ export default function CompanyHome() {
     }
 
   useEffect(() => {
-    setTimeout(() => setVisible(true),companyfetch(), 80)
+    companyfetch()
+    setTimeout(() => setVisible(true), 80)
   }, [])
 
   return (

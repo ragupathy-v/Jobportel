@@ -3,7 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import '../Styles/Navbar.css'
 import imag from '../Assert/logo/PortelLogo.png'
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 
 import useUser from '../hooks/UseUser';
 import { AuthContex } from '../Context/AuthProvider';
@@ -11,7 +11,8 @@ import { useContext } from 'react';
 
 function Navbars() {
   const { setIsLoggedIn } = useContext(AuthContex)
-  const user = useUser()
+  const {user} = useUser()
+  const navigate=useNavigate()
 
   const logout = () => {
     localStorage.removeItem('accesstoken')
@@ -19,7 +20,7 @@ function Navbars() {
     setIsLoggedIn(false)
     navigate('/')
   }
-
+ 
   return (
     <>
       {/* ── Desktop Navbar ── */}
@@ -47,7 +48,7 @@ function Navbars() {
             <Link className='login' to='/user'>Profile</Link>
           )}
           {/* Logout — distinct red outlined button */}
-          <Link className='logout-btn' onClick={logout} to='/'>Logout</Link>
+          <Link className='logout-btn' onClick={logout} >Logout</Link>
         </div>
       </nav>
 
@@ -73,7 +74,7 @@ function Navbars() {
                 ? <Nav.Link as={Link} to="/companies">Companies</Nav.Link>
                 : <Nav.Link as={Link} to="/job">Review Application</Nav.Link>}
 
-              {user?.user_type==='employee'&&<Nav.Link as={Link} to="/job">Application status</Nav.Link>} 
+              {user?.user_type==='employee'&&<Nav.Link as={Link} to="/applicationstatus">Application status</Nav.Link>} 
                 
               <Nav.Link as={Link} to="/Companyregister">
                 {user?.user_type == 'employee' ? 'Create Company' : 'Profile'}

@@ -16,7 +16,7 @@ function Hero() {
   const [location, setLocation] = useState("")
   const[jobs,setJobs]=useState([])
   const navigate = useNavigate()
-  const user=useUser()
+  const {user}=useUser()
 
 
   // const tags = ["Software Engineer", "React Developer", "Python", "Remote"]

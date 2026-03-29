@@ -12,7 +12,7 @@ import useUser from '../../hooks/UseUser';
 
 function Company() {
   const { id } = useParams()
-  const user = useUser()
+  const {user} = useUser()
   const [activeTab, setActiveTab] = useState('jobs')
   const [company, setCompany] = useState({})
   const [jobs, setJobs] = useState([])

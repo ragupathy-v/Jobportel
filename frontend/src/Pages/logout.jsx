@@ -1,7 +1,9 @@
 import React, { useContext } from 'react'
 import { AuthContex } from '../Context/AuthProvider'
+import { useNavigate } from 'react-router-dom'
 
 function Logout() {
+  const navigate=useNavigate()
     const{setIsLoggedIn}=useContext(AuthContex)
     const handelLogout=()=>{
   localStorage.removeItem('accesstoken')

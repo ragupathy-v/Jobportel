@@ -34,7 +34,7 @@ function Skeleton() {
 }
 
 function ApplicationStatus() {
-  const user = useUser()
+  const {user} = useUser()
   const [applications, setApplications] = useState([])
   const [loading, setLoading] = useState(true)
 

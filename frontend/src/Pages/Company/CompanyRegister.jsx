@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axiosInstant from '../../Axios/AxiosInstant'
 import '../../Styles/CompanyRegister.css'
 import useLoading ,{ LoadingCom } from "../../hooks/useLoading"
+import useUser from '../../hooks/UseUser'
 
 
 function CompanyRegister() {
@@ -15,7 +16,6 @@ function CompanyRegister() {
 
   //loading hook
   const{loading,startLoading,stopLoading}=useLoading()
-
     async function companyfetch() {
         try{
         const res=await axiosInstant.get('company/companyregister/')

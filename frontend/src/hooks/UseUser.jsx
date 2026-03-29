@@ -1,25 +1,12 @@
 import React from 'react'
-import { useState,useEffect } from 'react'
-import axiosInstant from '../Axios/AxiosInstant'
+import { useContext } from 'react'
+import { AuthContex } from '../Context/AuthProvider'
+
 
 function useUser() {
 
-    const[user,setUser]=useState([])
-    
-    useEffect(()=>{
-        const userapi=async()=>{
-      try{
-        const res= await axiosInstant.get('account/user/')
-        console.log(res.data,'user details')
-        setUser(res.data)
-      }
-      catch(err){ 
-        console.log(err)
-      }
-    };
-    userapi()
-    },[])
-  return  user
+   
+  return  useContext(AuthContex)
 }
 
 export default useUser

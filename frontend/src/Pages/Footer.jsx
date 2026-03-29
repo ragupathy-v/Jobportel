@@ -4,7 +4,7 @@ import '../Styles/Footer.css'
 import useUser from '../hooks/UseUser'
 
 function Footer() {
-    const user=useUser()
+    const {user}=useUser()
   const year = new Date().getFullYear()
 
   return (

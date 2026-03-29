@@ -11,7 +11,7 @@ function Profile() {
   const cloud_url = import.meta.env.VITE_CLOUDINARY_URL
   const [resume, setResume] = useState(null)
   const [fileName, setFileName] = useState('')
-  const data = useUser()
+  const {user,refreshUser} = useUser()
 
   function handleFileChange(e) {
     const file = e.target.files[0]
@@ -27,7 +27,7 @@ function Profile() {
       formresume.append('resume', resume)
       const res = await axiosInstant.patch('account/resume/', formresume)
       console.log(res)
-      window.location.reload()
+     refreshUser()
     } catch (err) {
       console.log(err.response?.data)
     }
@@ -45,14 +45,14 @@ function Profile() {
         <div className="pf-hero">
           <div className="pf-avatar-ring">
             <img
-              src={data?.profileImg || "/default-profile.png"}
+              src={user?.profileImg || "/default-profile.png"}
               alt="profile"
               className="pf-avatar"
             />
           </div>
           <div className="pf-hero-text">
-            <h1 className="pf-name">{data?.name || 'Anonymous'}</h1>
-            <span className="pf-badge">{data?.user_type}</span>
+            <h1 className="pf-name">{user?.name || 'Anonymous'}</h1>
+            <span className="pf-badge">{user?.user_type}</span>
           </div>
           <Link to="/editeprofile" className="pf-edit-btn">
             Edit Profile
@@ -65,30 +65,30 @@ function Profile() {
         <div className="pf-info-grid">
           <div className="pf-info-item">
             <span className="pf-info-label">✦ Email</span>
-            <span className="pf-info-value">{data?.email || '—'}</span>
+            <span className="pf-info-value">{user?.email || '—'}</span>
           </div>
           <div className="pf-info-item">
             <span className="pf-info-label">✦ Phone</span>
-            <span className="pf-info-value">{data?.phone_num || '—'}</span>
+            <span className="pf-info-value">{user?.phone_num || '—'}</span>
           </div>
           <div className="pf-info-item">
             <span className="pf-info-label">✦ Location</span>
-            <span className="pf-info-value">{data?.location || '—'}</span>
+            <span className="pf-info-value">{user?.location || '—'}</span>
           </div>
           <div className="pf-info-item">
             <span className="pf-info-label">✦ User Type</span>
-            <span className="pf-info-value pf-info-value--cap">{data?.user_type || '—'}</span>
+            <span className="pf-info-value pf-info-value--cap">{user?.user_type || '—'}</span>
           </div>
         </div>
 
         {/* ── Links row ── */}
-        {(data?.linkedin || data?.portfolio) && (
+        {(user?.linkedin || user?.portfolio) && (
           <>
             <div className="pf-divider" />
             <div className="pf-links-row">
-              {data?.linkedin && (
+              {user?.linkedin && (
                 <a
-                  href={data.linkedin}
+                  href={user.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="pf-link-pill pf-link-pill--linkedin"
@@ -97,9 +97,9 @@ function Profile() {
                   LinkedIn Profile
                 </a>
               )}
-              {data?.portfolio && (
+              {user?.portfolio && (
                 <a
-                  href={data.portfolio}
+                  href={user.portfolio}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="pf-link-pill pf-link-pill--portfolio"
@@ -113,15 +113,15 @@ function Profile() {
         )}
 
         {/* ── Resume section (employee only) ── */}
-        {data?.user_type === 'employee' && (
+        {user?.user_type === 'employee' && (
           <>
             <div className="pf-divider" />
             <div className="pf-resume-section">
               <p className="pf-section-title">Resume</p>
 
-              {data?.resume && (
+              {user?.resume && (
                 <a
-                  href={`${cloud_url}${data.resume}`}
+                  href={`${cloud_url}${user.resume}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="pf-resume-view"

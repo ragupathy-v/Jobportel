@@ -12,7 +12,7 @@ import CompanyHome from './Company/CompanyHome'
 
 
 function Home() {
-  const user=useUser()
+  const {user}=useUser()
 
   const navigate=useNavigate()
   const{setIsLoggedIn}=useContext(AuthContex)

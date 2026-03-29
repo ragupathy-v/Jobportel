@@ -3,9 +3,11 @@ import useUser from '../hooks/UseUser'
 import axiosInstant from '../Axios/AxiosInstant'
 import useLoading, { LoadingCom } from '../hooks/useLoading'
 import '../Styles/EditeProfile.css'
+import { useNavigate } from 'react-router-dom'
 
 function EditeProfile() {
-  const user = useUser()
+  const navigate=useNavigate()
+  const {user,refreshUser} = useUser()
   const { startLoading, stopLoading, loading } = useLoading()
   const [formData, setformData] = useState({
     name: '',
@@ -27,10 +29,12 @@ function EditeProfile() {
     try {
       const res = await axiosInstant.patch(`account/register/${user?.id}/`, formData)
       console.log(res.data, 'edited')
+      refreshUser()
     } catch (err) {
       console.log(err)
     } finally {
       stopLoading()
+      navigate('/user')
     }
   }
 

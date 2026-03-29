@@ -2,8 +2,11 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Navbars from '../Components/Navbars'
 import Footer from '../Pages/Footer'
+import useUser from '../hooks/UseUser'
 
 function CompaniesLayouts() {
+  const{useloading}=useUser()
+  if(useloading) return null
   return (
     <>
     <Navbars/>

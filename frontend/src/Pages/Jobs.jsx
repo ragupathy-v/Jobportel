@@ -9,7 +9,7 @@ import "../Styles/jobs.css";
 import useUser from "../hooks/UseUser";
 
 function Jobs() {
-  const user = useUser()
+  const {user} = useUser()
   const [jobs, setJobs] = useState([])
 
   async function fetchJobs() {
