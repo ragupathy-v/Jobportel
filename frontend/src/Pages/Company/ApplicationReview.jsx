@@ -152,10 +152,10 @@ function ApplicationReview() {
               )}
 
               {/* Profile */}
-              <Link to={`/user/${application.user?.id || ''}`} className="arc-profile-btn">
+              {/* <Link to={`/user/${application.user?.id || ''}`} className="arc-profile-btn">
                 <IconUser />
                 View Profile
-              </Link>
+              </Link> */}
 
               {/* Status Select */}
               <div className="arc-select-wrap">
