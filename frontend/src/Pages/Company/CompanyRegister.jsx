@@ -13,7 +13,7 @@ function CompanyRegister() {
     const[logo,setLogo]=useState(null)
 
     const[createCompany,setcreateCompany]=useState([])
-
+    const{refreshUser}=useUser()
   //loading hook
   const{loading,startLoading,stopLoading}=useLoading()
     async function companyfetch() {
@@ -22,6 +22,7 @@ function CompanyRegister() {
         console.log(res.data[0])
       
         setcreateCompany(res.data[0])
+        
         }
         catch(err){
             console.log(err)
@@ -35,6 +36,7 @@ function CompanyRegister() {
             const res= await axiosInstant.post('company/companyregister/',{name,about,address,website})
             console.log(res.data,'succes')
             companyfetch()
+            refreshUser()
             
         }
         catch (err) {

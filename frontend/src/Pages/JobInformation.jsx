@@ -12,29 +12,30 @@ function JobInformation() {
     const{id}=useParams()
     const [job,setJob]=useState([])
 
-    async function application(){
-      
-      try{
-      const res=await axiosInstant.post(`company/application/`,{'job':id})
-      console.log(res.status)
-      fetchJobinfo()
-      }
-      catch(err){
-        console.log(err.response?.data)
-        console.log(err.status)       
-      }
-    }
-
     async function fetchJobinfo(){
       try{
         const res=await axiosInstant.get(`company/jobs/${id}`)
         setJob(res.data)
-        console.log(res.data)
+        console.log(res.data,'jobfetch')
       }
       catch(err){
         console.log(err)
       }
     }
+    async function application(){
+      
+      try{
+      const res=await axiosInstant.post(`company/application/`,{'job_id':id})
+      console.log(res.data,'applied ')
+      fetchJobinfo()
+      }
+      catch(err){
+        console.log(err)
+        console.log(err.status)       
+      }
+    }
+
+    
     useEffect(()=>{fetchJobinfo()},
   [id])
   return (
@@ -72,7 +73,7 @@ function JobInformation() {
                 {job.applylink ? <a target="_blank"  
                 rel="noopener noreferrer"
                 href={job.applylink}
-                >apply on site</a> : job.is_applied ? <button disabled  >applied</button>: <Link onClick={application} target='_blank' to={`/application/${job.id}`}>apply</Link>}
+                >apply on site</a> : job.is_applied ? <button disabled  >applied</button>: <Link onClick={application} target='_blank' to={`/application/${job.id}/`}>apply</Link>}
                 <p className=' m-1'>Applicants:{job.application_count}</p>
               </div>
                 <hr/>

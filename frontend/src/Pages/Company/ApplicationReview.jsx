@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useCallback } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import axiosInstant from '../../Axios/AxiosInstant'
 import '../../Styles/ApplicationReview.css'
@@ -64,16 +64,16 @@ function ApplicationReview() {
     }
   }
 
-  async function applicationapi() {
-    try {
-      const res = await axiosInstant.get(`company/application/`, {
-        params: { job: id }
-      })
-      setApplications(res.data)
-    } catch (err) {
-      console.log(err.response)
-    }
+  const applicationapi = useCallback(async () => {
+  try {
+    const res = await axiosInstant.get(`company/application/`, {
+      params: { job: id }
+    })
+    setApplications(res.data)
+  } catch (err) {
+    console.log(err.response)
   }
+}, [id])
 
   useEffect(() => { applicationapi() }, [id])
 

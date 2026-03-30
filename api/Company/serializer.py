@@ -52,6 +52,11 @@ class Jobserializer(serializers.ModelSerializer):
 class Applicationserializer(serializers.ModelSerializer):
     user=userserializer(read_only=True)
     job=Jobserializer(read_only=True)
+    job_id=serializers.PrimaryKeyRelatedField(
+        queryset=Job.objects.all(),
+        source='job',
+        write_only=True
+    )
     #company=Companyinfoserializer(read_only=True)
     class Meta:
         model=Application

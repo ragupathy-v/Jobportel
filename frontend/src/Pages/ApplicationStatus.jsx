@@ -44,6 +44,7 @@ function ApplicationStatus() {
       const res = await axiosInstant.get('company/application/', {
         params: { userid: user?.id }
       })
+      console.log(res.data,'application status')
       setApplications(res.data)
     } catch (err) {
       console.log(err)
