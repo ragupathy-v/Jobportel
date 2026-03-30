@@ -54,9 +54,9 @@ function Profile() {
             <h1 className="pf-name">{user?.name || 'Anonymous'}</h1>
             <span className="pf-badge">{user?.user_type}</span>
           </div>
-          <Link to="/editeprofile" className="pf-edit-btn">
+          {user?.user_type==='employee' && <Link to="/editeprofile" className="pf-edit-btn">
             Edit Profile
-          </Link>
+          </Link>}
         </div>
 
         <div className="pf-divider" />

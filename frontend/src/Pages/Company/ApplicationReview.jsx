@@ -53,6 +53,7 @@ const STATUS_LABELS = {
 function ApplicationReview() {
   const { id } = useParams()
   const [applications, setApplications] = useState([])
+  const cloud_url = import.meta.env.VITE_CLOUDINARY_URL
 
   async function updatestates(appId, status) {
     try {
@@ -135,7 +136,7 @@ function ApplicationReview() {
               {/* Resume */}
               {application.user?.resume ? (
                 <a
-                  href={application.user.resume}
+                  href={`${cloud_url}${application.user.resume}`}
                   target="_blank"
                   rel="noreferrer"
                   className="arc-resume-btn"
