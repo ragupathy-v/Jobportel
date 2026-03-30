@@ -60,7 +60,7 @@ function ApplicationReview() {
     } catch (err) {
       console.log(err)
     } finally {
-      applicationapi()
+     await applicationapi()
     }
   }
 
