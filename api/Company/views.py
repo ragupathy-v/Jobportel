@@ -83,6 +83,7 @@ class JobView(mixins.ListModelMixin,
         return self.destroy(request)  '''
 
 
+from django.db import connection
 import time 
 
 
@@ -97,14 +98,17 @@ class jobViewset(ModelViewSet):
     
     def list(self, request, *args, **kwargs):
         start = time.perf_counter()
+        queries_before = len(connection.queries)
 
         response = super().list(request, *args, **kwargs)
 
         elapsed = time.perf_counter() - start
+        queries_after = len(connection.queries)
+
         print(f"JOBS API TIME: {elapsed:.3f} seconds")
+        print(f"DB QUERIES: {queries_after - queries_before}")
 
         return response
-    
 
     def get_queryset(self):
         user=self.request.user
@@ -163,42 +167,3 @@ class ApplicationViewset(ModelViewSet):
     
 
 
-from rest_framework.views import APIView
-from rest_framework.response import Response
-import time
-
-
-class SpeedTestView(APIView):
-
-    def get(self, request):
-        start = time.perf_counter()
-
-        response = Response({
-            "message": "API is working"
-        })
-
-        elapsed = time.perf_counter() - start
-        print(f"SPEED TEST TIME: {elapsed:.3f} seconds")
-
-        return response
-    
-
-import time
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from .models import Job
-
-class DBTestView(APIView):
-    def get(self, request):
-        start = time.perf_counter()
-
-        Job.objects.count()
-
-        elapsed = time.perf_counter() - start
-
-        print(f"DB TEST TIME: {elapsed:.3f} seconds")
-
-        return Response({
-            "database_time_seconds": round(elapsed, 3)
-        })
-    
