@@ -85,15 +85,7 @@ class JobView(mixins.ListModelMixin,
 
 import time 
 
-def list(self, request, *args, **kwargs):
-    start = time.perf_counter()
 
-    response = super().list(request, *args, **kwargs)
-
-    elapsed = time.perf_counter() - start
-    print(f"JOBS API TIME: {elapsed:.3f} seconds")
-
-    return response
 
 class jobViewset(ModelViewSet):
     queryset=Job.objects.all()
@@ -103,8 +95,16 @@ class jobViewset(ModelViewSet):
     def get_serializer_context(self):
         return {"request":self.request}
     
-    list()
-    
+    def list(self, request, *args, **kwargs):
+        start = time.perf_counter()
+
+        response = super().list(request, *args, **kwargs)
+
+        elapsed = time.perf_counter() - start
+        print(f"JOBS API TIME: {elapsed:.3f} seconds")
+
+        return response
+
     def get_queryset(self):
         user=self.request.user
         location=self.request.query_params.get('location')
