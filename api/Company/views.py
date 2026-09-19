@@ -81,6 +81,20 @@ class JobView(mixins.ListModelMixin,
         return self.create(request)
     def delete(self, request,pk):
         return self.destroy(request)  '''
+
+
+import time 
+
+def list(self, request, *args, **kwargs):
+    start = time.perf_counter()
+
+    response = super().list(request, *args, **kwargs)
+
+    elapsed = time.perf_counter() - start
+    print(f"JOBS API TIME: {elapsed:.3f} seconds")
+
+    return response
+
 class jobViewset(ModelViewSet):
     queryset=Job.objects.all()
     serializer_class=Jobserializer
@@ -88,6 +102,9 @@ class jobViewset(ModelViewSet):
 
     def get_serializer_context(self):
         return {"request":self.request}
+    
+    list()
+    
     def get_queryset(self):
         user=self.request.user
         location=self.request.query_params.get('location')
