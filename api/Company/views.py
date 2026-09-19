@@ -161,3 +161,24 @@ class ApplicationViewset(ModelViewSet):
             return Application.objects.filter(user__id=user_id)
         return Application.objects.all()
     
+
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+import time
+
+
+class SpeedTestView(APIView):
+
+    def get(self, request):
+        start = time.perf_counter()
+
+        response = Response({
+            "message": "API is working"
+        })
+
+        elapsed = time.perf_counter() - start
+        print(f"SPEED TEST TIME: {elapsed:.3f} seconds")
+
+        return response
+    

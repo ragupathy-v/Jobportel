@@ -11,6 +11,7 @@ router.register('application',views.ApplicationViewset)
 urlpatterns = [
     path('',include(router.urls)),
     #path('job/',views.JobView.as_view()),
-    path('companyregister/',views.CompanyRegister.as_view())
+    path('companyregister/',views.CompanyRegister.as_view()),
+    path('speed-test/', views.SpeedTestView.as_view()),
     
 ]
