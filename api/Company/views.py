@@ -98,15 +98,12 @@ class jobViewset(ModelViewSet):
     
     def list(self, request, *args, **kwargs):
         start = time.perf_counter()
-        queries_before = len(connection.queries)
 
         response = super().list(request, *args, **kwargs)
 
         elapsed = time.perf_counter() - start
-        queries_after = len(connection.queries)
 
         print(f"JOBS API TIME: {elapsed:.3f} seconds")
-        print(f"DB QUERIES: {queries_after - queries_before}")
 
         return response
 
@@ -167,3 +164,29 @@ class ApplicationViewset(ModelViewSet):
     
 
 
+import time
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+class SimpleJobTestView(APIView):
+    def get(self, request):
+        start = time.perf_counter()
+
+        jobs = list(
+            Job.objects.values(
+                'id',
+                'title',
+                'location',
+                'created_at'
+            )
+        )
+
+        elapsed = time.perf_counter() - start
+
+        print(f"SIMPLE JOB TEST: {elapsed:.3f} seconds")
+
+        return Response({
+            "jobs": jobs,
+            "time": round(elapsed, 3)
+        })
