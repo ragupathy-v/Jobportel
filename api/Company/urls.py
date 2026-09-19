@@ -13,5 +13,6 @@ urlpatterns = [
     #path('job/',views.JobView.as_view()),
     path('companyregister/',views.CompanyRegister.as_view()),
     path('speed-test/', views.SpeedTestView.as_view()),
+    path('db-test/', views.DBTestView.as_view()),
     
 ]

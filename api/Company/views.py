@@ -182,3 +182,23 @@ class SpeedTestView(APIView):
 
         return response
     
+
+import time
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .models import Job
+
+class DBTestView(APIView):
+    def get(self, request):
+        start = time.perf_counter()
+
+        Job.objects.count()
+
+        elapsed = time.perf_counter() - start
+
+        print(f"DB TEST TIME: {elapsed:.3f} seconds")
+
+        return Response({
+            "database_time_seconds": round(elapsed, 3)
+        })
+    
