@@ -104,6 +104,7 @@ class jobViewset(ModelViewSet):
         print(f"JOBS API TIME: {elapsed:.3f} seconds")
 
         return response
+    list()
 
     def get_queryset(self):
         user=self.request.user
