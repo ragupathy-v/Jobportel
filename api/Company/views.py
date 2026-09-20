@@ -163,30 +163,25 @@ class ApplicationViewset(ModelViewSet):
         return Application.objects.all()
     
 
-
-import time
-
 from rest_framework.views import APIView
-from rest_framework.response import Response
-
-class SimpleJobTestView(APIView):
+class SerializerJobTestView(APIView):
     def get(self, request):
         start = time.perf_counter()
 
-        jobs = list(
-            Job.objects.values(
-                'id',
-                'title',
-                'location',
-                'created_at'
-            )
+        jobs = Job.objects.all()
+        serializer = Jobserializer(
+            jobs,
+            many=True,
+            context={'request': request}
         )
+
+        data = serializer.data
 
         elapsed = time.perf_counter() - start
 
-        print(f"SIMPLE JOB TEST: {elapsed:.3f} seconds")
+        print(f"SERIALIZER JOB TEST: {elapsed:.3f} seconds")
 
         return Response({
-            "jobs": jobs,
-            "time": round(elapsed, 3)
+            "time": round(elapsed, 3),
+            "count": len(data)
         })

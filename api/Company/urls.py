@@ -12,6 +12,9 @@ urlpatterns = [
     path('',include(router.urls)),
     #path('job/',views.JobView.as_view()),
     path('companyregister/',views.CompanyRegister.as_view()),
-   path('simple-job-test/', views.SimpleJobTestView.as_view()),
+    path(
+    'serializer-job-test/',
+    views.SerializerJobTestView.as_view()
+),
     
 ]
