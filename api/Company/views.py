@@ -83,60 +83,108 @@ class JobView(mixins.ListModelMixin,
         return self.destroy(request)  '''
 
 
-from django.db import connection
-import time 
 
+
+
+from django.db.models import Count, Exists, OuterRef
+from django.core.exceptions import ValidationError
+from rest_framework.viewsets import ModelViewSet
+
+from .models import Job, Companyinfo, Application
+from .serializer import Jobserializer
 
 
 class jobViewset(ModelViewSet):
-    queryset=Job.objects.all()
-    serializer_class=Jobserializer
-    permission_classes=[IsAuthenticated]
+    queryset = Job.objects.all()
+    serializer_class = Jobserializer
+    permission_classes = [IsAuthenticated]
 
     def get_serializer_context(self):
-        return {"request":self.request}
-    
-    def list(self, request, *args, **kwargs):
-        start = time.perf_counter()
-
-        response = super().list(request, *args, **kwargs)
-
-        elapsed = time.perf_counter() - start
-
-        print(f"JOBS API TIME: {elapsed:.3f} seconds")
-
-        return response
+        return {
+            "request": self.request
+        }
 
     def get_queryset(self):
-        user=self.request.user
-        location=self.request.query_params.get('location')
-        job_title=self.request.query_params.get('title')
-        id=self.request.query_params.get('id')
-        
-        if id:
-            company=Companyinfo.objects.get(id=id)
-            return Job.objects.filter(company=company).order_by('-created_at')
-        
+        user = self.request.user
+
+        location = self.request.query_params.get("location")
+        job_title = self.request.query_params.get("title")
+        company_id = self.request.query_params.get("id")
+
+        # Check whether the current user has applied to each job
+        applied_subquery = Application.objects.filter(
+            user=user,
+            job=OuterRef("pk")
+        )
+
+        # Common optimized queryset
+        queryset = (
+            Job.objects
+            .select_related(
+                "user",
+                "company"
+            )
+            .prefetch_related(
+                "skills"
+            )
+            .annotate(
+                application_count=Count("application"),
+                is_applied=Exists(applied_subquery)
+            )
+        )
+
+        # Company jobs
+        if company_id:
+            return queryset.filter(
+                company_id=company_id
+            ).order_by("-created_at")
+
+        # Search by title + location
         if job_title and location:
-            return Job.objects.filter(title__icontains=job_title,location__icontains=location).order_by('-created_at')
-        elif job_title:
-            return Job.objects.filter(title__icontains=job_title).order_by('-created_at')
-        elif location: 
-            return Job.objects.filter(location__icontains=location).order_by('-created_at')
-        
-        if user.user_type=='employee':
-            return Job.objects.all().order_by('-created_at')
-        elif user.user_type=='company':
-            return Job.objects.filter(company__user=user).order_by('-created_at')
-      
-    
+            return queryset.filter(
+                title__icontains=job_title,
+                location__icontains=location
+            ).order_by("-created_at")
+
+        # Search by title
+        if job_title:
+            return queryset.filter(
+                title__icontains=job_title
+            ).order_by("-created_at")
+
+        # Search by location
+        if location:
+            return queryset.filter(
+                location__icontains=location
+            ).order_by("-created_at")
+
+        # Employee → show all jobs
+        if user.user_type == "employee":
+            return queryset.order_by("-created_at")
+
+        # Company → show only their jobs
+        if user.user_type == "company":
+            return queryset.filter(
+                company__user=user
+            ).order_by("-created_at")
+
+        return queryset.none()
+
     def perform_create(self, serializer):
-        user=self.request.user
+        user = self.request.user
+
         try:
-            company=Companyinfo.objects.get(user=user) 
+            company = Companyinfo.objects.get(user=user)
         except Companyinfo.DoesNotExist:
-            raise ValidationError({'message':'create company first'})
-        serializer.save(user=user,company=company)
+            raise ValidationError({
+                "message": "Create company first"
+            })
+
+        serializer.save(
+            user=user,
+            company=company
+        )
+
 
 from django.db import IntegrityError
 from rest_framework.exceptions import ValidationError
@@ -163,25 +211,3 @@ class ApplicationViewset(ModelViewSet):
         return Application.objects.all()
     
 
-from rest_framework.views import APIView
-class SerializerJobTestView(APIView):
-    def get(self, request):
-        start = time.perf_counter()
-
-        jobs = Job.objects.all()
-        serializer = Jobserializer(
-            jobs,
-            many=True,
-            context={'request': request}
-        )
-
-        data = serializer.data
-
-        elapsed = time.perf_counter() - start
-
-        print(f"SERIALIZER JOB TEST: {elapsed:.3f} seconds")
-
-        return Response({
-            "time": round(elapsed, 3),
-            "count": len(data)
-        })

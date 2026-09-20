@@ -26,27 +26,16 @@ class Companyinfoserializer(serializers.ModelSerializer):
 
 
 class Jobserializer(serializers.ModelSerializer):
-    skills=SkillSerializer(many=True,read_only=True)
-    user=userserializer(read_only=True)
-    company=Companyinfoserializer(read_only=True)
+    skills = SkillSerializer(many=True, read_only=True)
+    user = userserializer(read_only=True)
+    company = Companyinfoserializer(read_only=True)
 
-    is_applied=serializers.SerializerMethodField()
-    application_count=serializers.SerializerMethodField()
+    is_applied = serializers.BooleanField(read_only=True)
+    application_count = serializers.IntegerField(read_only=True)
 
     class Meta:
-        model=Job
-        fields='__all__'
-
-
-    def get_is_applied(self,obj):
-        user=self.context['request'].user
-
-        if user.is_anonymous:
-            return False
-        return Application.objects.filter(user=user,job=obj).exists()
-    
-    def get_application_count(self,obj):
-        return Application.objects.filter(job=obj).count()
+        model = Job
+        fields = '__all__'
 
 
 class Applicationserializer(serializers.ModelSerializer):
